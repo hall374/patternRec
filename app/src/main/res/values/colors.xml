@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="blockDefaultBlue">#2176ff</color>
+    <color name="blockDefaultRed">#ff0000</color>
+    <color name="blockDefaultPurple">#c608db</color>
+    <color name="blockDefaultGreen">#02db05</color>
+    <color name="blockHighlightBlue">#6da5ff</color>
+    <color name="blockHighlightRed">#ff8282</color>
+    <color name="blockHighlightPurple">#e502ff</color>
+    <color name="blockHighlightGreen">#2dff30</color>
+</resources>
