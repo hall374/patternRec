@@ -1,0 +1,3 @@
+# Gitignore for patternRec
+/build/*
+.gradle/*
