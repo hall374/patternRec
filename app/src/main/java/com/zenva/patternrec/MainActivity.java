@@ -243,6 +243,8 @@ public class MainActivity extends AppCompatActivity {
                 startButton.setVisibility(View.VISIBLE);
                 startButton.setEnabled(true);
             }
+            displayScore();
+            displayLevel();
         }
     }
 
