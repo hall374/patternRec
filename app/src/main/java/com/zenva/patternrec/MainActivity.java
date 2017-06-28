@@ -4,10 +4,10 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<Integer, Integer> highlightColors;
     // Map for original colors
     private HashMap<Integer, Integer> originalColors;
+    // Map for button sounds
+    private HashMap<Integer, MediaPlayer> buttonSounds;
 
     // 500 millisecond delay for color transition
     private int highlightDuration = 500;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     // Current level (used for score)
     int currentLevel = 5;
 
-    // Yes...this is messy
+    // Yes...this is messy, but allows for instant list creation like in C#
     final ArrayList<Integer> buttonIDs = new ArrayList<>(Arrays.asList(new Integer[] {
             R.id.btnColor0,
             R.id.btnColor1,
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Initialize hashmap for linking buttons to highlight colors
-        initColorMaps();
+        initMaps();
 
         // Display high score
         displayHighScore();
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
     // Determine whether to display animation or not
     // Animations don't work in power saver
     public void highlightButton(View toHighlight){
+        buttonSounds.get(toHighlight.getId()).setVolume(100, 100);
+        buttonSounds.get(toHighlight.getId()).start();
         if(!powerManager.isPowerSaveMode())
             highlightButtonNormal(toHighlight);
         else
@@ -163,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Initialize map for highlight color based on ID
-    private void initColorMaps(){
+    private void initMaps(){
         highlightColors = new HashMap<Integer, Integer>();
         highlightColors.put(R.id.btnColor0, getResources().getColor(R.color.blockHighlightBlue));
         highlightColors.put(R.id.btnColor1, getResources().getColor(R.color.blockHighlightRed));
@@ -175,6 +179,12 @@ public class MainActivity extends AppCompatActivity {
         originalColors.put(R.id.btnColor1, getResources().getColor(R.color.blockDefaultRed));
         originalColors.put(R.id.btnColor2, getResources().getColor(R.color.blockDefaultPurple));
         originalColors.put(R.id.btnColor3, getResources().getColor(R.color.blockDefaultGreen));
+
+        buttonSounds = new HashMap<Integer, MediaPlayer>();
+        buttonSounds.put(R.id.btnColor0, MediaPlayer.create(this, R.raw.block0));
+        buttonSounds.put(R.id.btnColor1, MediaPlayer.create(this, R.raw.block1));
+        buttonSounds.put(R.id.btnColor2, MediaPlayer.create(this, R.raw.block2));
+        buttonSounds.put(R.id.btnColor3, MediaPlayer.create(this, R.raw.block3));
     }
 
     // Display pattern
