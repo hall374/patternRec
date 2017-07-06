@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     // For enabling disabling touch on color buttons
     private Boolean isToucheable = false;
 
+    // For enabling/disabline sound
+    private Boolean silentMode = false;
+
     // Enum for handling this stupid fucking threading bullshit
     private enum GameStep{
         START,
@@ -123,10 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
     // Determine whether to display animation or not
     // Animations don't work in power saver
-    public void highlightButton(View toHighlight){
-        buttonSounds.get(toHighlight.getId()).setVolume(100, 100);
-        buttonSounds.get(toHighlight.getId()).start();
-        if(!powerManager.isPowerSaveMode())
+    public void highlightButton(View toHighlight) {
+        if(!silentMode) {
+            buttonSounds.get(toHighlight.getId()).setVolume(100, 100);
+            buttonSounds.get(toHighlight.getId()).start();
+        }
+        if (!powerManager.isPowerSaveMode())
             highlightButtonNormal(toHighlight);
         else
             highlightButtonPowerSaver(toHighlight);
@@ -164,6 +169,13 @@ public class MainActivity extends AppCompatActivity {
                }, displayDelay/2);
            }
         }, displayDelay/2);
+    }
+
+    // Toggle silent mode
+    public void toggleSilentMode(View toggle){
+        silentMode = !silentMode;
+        if (silentMode) toggle.setBackgroundColor(getResources().getColor(R.color.blockHighlightBlue));
+        else toggle.setBackgroundColor(0);
     }
 
     // Initialize map for highlight color based on ID

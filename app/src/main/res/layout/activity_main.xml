@@ -139,4 +139,15 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="73dp" />
 
+    <ImageButton
+        android:id="@+id/btnToggleSilent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="28dp"
+        android:background="#ffffff"
+        android:onClick="toggleSilentMode"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode"
+        tools:layout_editor_absoluteY="7dp" />
+
 </android.support.constraint.ConstraintLayout>
