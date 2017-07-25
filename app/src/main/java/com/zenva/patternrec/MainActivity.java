@@ -1,5 +1,7 @@
 package com.zenva.patternrec;
 
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -22,11 +24,11 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     // Map for highlight colors
-    private HashMap<Integer, Integer> highlightColors;
+    private SparseIntArray highlightColors;
     // Map for original colors
-    private HashMap<Integer, Integer> originalColors;
+    private SparseIntArray originalColors;
     // Map for button sounds
-    private HashMap<Integer, MediaPlayer> buttonSounds;
+    private SparseArray<MediaPlayer> buttonSounds;
 
     // 500 millisecond delay for color transition
     private int highlightDuration = 500;
@@ -181,19 +183,19 @@ public class MainActivity extends AppCompatActivity {
 
     // Initialize map for highlight color based on ID
     private void initMaps(){
-        highlightColors = new HashMap<Integer, Integer>();
+        highlightColors = new SparseIntArray();
         highlightColors.put(R.id.btnColor0, getResources().getColor(R.color.blockHighlightBlue));
         highlightColors.put(R.id.btnColor1, getResources().getColor(R.color.blockHighlightRed));
         highlightColors.put(R.id.btnColor2, getResources().getColor(R.color.blockHighlightPurple));
         highlightColors.put(R.id.btnColor3, getResources().getColor(R.color.blockHighlightGreen));
 
-        originalColors = new HashMap<Integer, Integer>();
+        originalColors = new SparseIntArray();
         originalColors.put(R.id.btnColor0, getResources().getColor(R.color.blockDefaultBlue));
         originalColors.put(R.id.btnColor1, getResources().getColor(R.color.blockDefaultRed));
         originalColors.put(R.id.btnColor2, getResources().getColor(R.color.blockDefaultPurple));
         originalColors.put(R.id.btnColor3, getResources().getColor(R.color.blockDefaultGreen));
 
-        buttonSounds = new HashMap<Integer, MediaPlayer>();
+        buttonSounds = new SparseArray<MediaPlayer>();
         buttonSounds.put(R.id.btnColor0, MediaPlayer.create(this, R.raw.block0));
         buttonSounds.put(R.id.btnColor1, MediaPlayer.create(this, R.raw.block1));
         buttonSounds.put(R.id.btnColor2, MediaPlayer.create(this, R.raw.block2));
