@@ -128,8 +128,9 @@ public class MainActivity extends AppCompatActivity {
     // Animations don't work in power saver
     public void highlightButton(View toHighlight) {
         if(!silentMode) {
-            buttonSounds.get(toHighlight.getId()).setVolume(100, 100);
-            buttonSounds.get(toHighlight.getId()).start();
+            final MediaPlayer currentButtonSound = buttonSounds.get(toHighlight.getId());
+            currentButtonSound.seekTo(0);
+            currentButtonSound.start();
         }
         if (!powerManager.isPowerSaveMode())
             highlightButtonNormal(toHighlight);
